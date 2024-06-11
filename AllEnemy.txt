@@ -1,0 +1,5 @@
+1, dragon, dragon_egg, lighting, 200, 200, 67, 100, 300, 400, AA
+2, bold_head, dragon_egg, pupu, 250, 300, 67, 100, 60, 120, AAA
+3, wolf, wolfhead, wolfhead, 200, 200, 80, 80, 80, 80, AA
+4, dog, pupu2, pupu, 130, 180, 70, 70, 60, 120, A
+5, dog, pupu2, pupu, 130, 180, 70, 70, 60, 120, A
