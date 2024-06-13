@@ -12,8 +12,10 @@ import javax.sound.sampled.LineUnavailableException;
 import javax.sound.sampled.UnsupportedAudioFileException;
 import javax.swing.*;
 
+import com.martio.game.Game;
 import com.martio.game.SoundHandler;
 
+import game.GameFrame;
 import game.TimeFeeling;
 
 public class EndPanel extends Canvas implements Runnable{
@@ -42,7 +44,6 @@ public class EndPanel extends Canvas implements Runnable{
 
     //結束後cp結算
     SoundHandler sound;
-    int total_CP; //玩家獲得
     int img_num;
     boolean success;
     Image image;
@@ -74,14 +75,14 @@ public class EndPanel extends Canvas implements Runnable{
         }catch(IOException e){System.out.println("not get img!");}
     }
 
-    //設定total cp(+-10,四捨五入 , 鬆餅是怪獸1%)
+    //設定total cp(+-10,四捨五入 , 鬆餅1)
     public void setCP(){
-        total_CP = (int)Math.round(Game2.enemy_CP*0.1);
+        Game2.total_CP = (int)Math.round(Game2.enemy_CP*0.1);
         if(success){
-            total_CP += (int)Math.round(Game2Panel.getWaffleScore()*(Game2.enemy_CP*0.1));
+            Game2.total_CP += Game2Panel.getWaffleScore();
         }
         else{
-            total_CP = Math.abs(total_CP-(int)Math.round(Game2Panel.getWaffleScore()*(Game2.enemy_CP*0.1)));
+            Game2.total_CP = Math.abs(Game2.total_CP-Game2Panel.getWaffleScore());
         }
     }
 
@@ -134,9 +135,9 @@ public class EndPanel extends Canvas implements Runnable{
         g.setFont(new Font("ComicSansMS",Font.PLAIN,100));
         g.drawString("+"+String.valueOf(Game2Panel.getWaffleScore()), END_WIDHTH/2,60+WAFFLE_HEIGHT+WL_HEIGHT);
         if(success)
-        g.drawString("CP +"+String.valueOf(total_CP),END_WIDHTH/2 - WAFFLE_WIDTH-50,250+WAFFLE_HEIGHT+WL_HEIGHT);
+        g.drawString("CP +"+String.valueOf(Game2.total_CP),END_WIDHTH/2 - WAFFLE_WIDTH-50,250+WAFFLE_HEIGHT+WL_HEIGHT);
         else{
-            g.drawString("CP -"+String.valueOf(total_CP),END_WIDHTH/2 - WAFFLE_WIDTH-50,250+WAFFLE_HEIGHT+WL_HEIGHT);
+            g.drawString("CP -"+String.valueOf(Game2.total_CP),END_WIDHTH/2 - WAFFLE_WIDTH-50,250+WAFFLE_HEIGHT+WL_HEIGHT);
         }
     }
 
@@ -162,6 +163,10 @@ public class EndPanel extends Canvas implements Runnable{
             if(all_delta >20) {
             	break;
             }
+        }
+        GameFrame.addCp = Game2.total_CP;
+        if(!success) {
+        	GameFrame.addCp *= (-1);
         }
         Window window = SwingUtilities.getWindowAncestor(EndPanel.this);
         if (window != null) {

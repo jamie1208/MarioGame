@@ -56,7 +56,6 @@ public class Game2Panel extends Canvas implements Runnable{
     //321倒數
     DrawSecond drawSecond; 
     int second = -1;
-    int enemy_CP;
     boolean isDrawSecond = false;
     //音效
     Thread second_sound; //321倒數
@@ -101,7 +100,6 @@ public class Game2Panel extends Canvas implements Runnable{
 
     //起始設定
     public void initialSetting()throws UnsupportedAudioFileException, IOException, LineUnavailableException{
-        this.enemy_CP = Game2.enemy_CP;
         //新增敵人,自己
         newEnemy();
         newSquirrel();
@@ -138,7 +136,7 @@ public class Game2Panel extends Canvas implements Runnable{
     }
 
     public void setSpeedMtp(){
-        speed_mtp = Math.pow(enemy_CP/10, 1/2);
+        speed_mtp = Math.pow(Game2.enemy_CP/10, 1/2);
     }
 
     //新建enemy
@@ -269,7 +267,7 @@ public class Game2Panel extends Canvas implements Runnable{
             //attack1碰到squirrel
             if(p.intersects(squirrel)){
                 playSound(ATTSCK_SOUND,attack_sound);
-                System.out.println("attack2 Collisioin!");
+                //System.out.println("attack2 Collisioin!");
                 lifes.love -= 1;
                 lifes.changeLoveImg();
                 //System.out.println("lifes.love = "+lifes.love);
@@ -288,7 +286,7 @@ public class Game2Panel extends Canvas implements Runnable{
             //attack1碰到squirrel
             if(p.intersects(squirrel)){
                 playSound(ATTSCK_SOUND,attack_sound);
-                System.out.println("attack1 Collisioin!");
+                //System.out.println("attack1 Collisioin!");
                 lifes.love -= 1;
                 lifes.changeLoveImg();
                 //System.out.println("lifes.love = "+lifes.love);

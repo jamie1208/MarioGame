@@ -1,6 +1,6 @@
 package game2.src.Game2;
 
-import com.martio.game.GameFrame;
+import game.GameFrame;
 
 //執行緒，可與main執行緒分開 - 同時執行多件事
 //Thread gameThread;
@@ -23,14 +23,15 @@ public class Game2 {
     int waffle_score;
     boolean success; //遊戲通關
     String[] randomEnemy; 
-    static int enemy_CP;
-    int total_CP;
+    static double enemy_CP;
+    static int total_CP;
 
-    public Game2(String[] randomEnemy,int enemy_CP,GameFrame gameFrame)throws Exception{
+    public Game2(String[] randomEnemy,double enemy_CP,GameFrame gameFrame)throws Exception{
 
         this.randomEnemy = randomEnemy;
         Game2.enemy_CP = enemy_CP;
         Game2.frame = gameFrame; 
+        Game2.total_CP = 0;
     
 		startPanel = new StartPanel(randomEnemy);
 		startThread = new Thread(startPanel);
@@ -39,10 +40,5 @@ public class Game2 {
 		frame.setFrame();
 		startThread.start();
         System.out.println("GameENd!");   
-    }
-
-    //回傳遊戲結束後獲得的enemy_CP
-    public int getCP(){
-        return total_CP;
     }
 }

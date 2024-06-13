@@ -108,7 +108,7 @@ public class StartPanel extends Canvas implements Runnable{
             	delta --;
             }
             if(checkStart()){
-            	System.out.println("start checked");
+            	//System.out.println("start checked");
                 break;
             }
         }
